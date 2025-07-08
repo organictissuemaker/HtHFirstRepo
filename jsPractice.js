@@ -5,25 +5,47 @@ const shopping = {
   brick: [1.00, 100],
   node: [4.00, 100]
 };
-const cart = [("boba", 2), ("mochi", 6), ("matcha", 0), ("brick", 1), ("node", 1)];
+
+const cart = [
+  ["boba", 2], 
+  ["mochi", 6], 
+  ["matcha", 0], 
+  ["brick", 1], 
+  ["node", 1]
+];
+
 function myCartTotal(cart) {
   let total = 0.0;
-  for (let item of cart){  //item is a tuple w/ quantity
-    //check if the item exists
-      //yes - decriment the stock by 1, add to the total
-        //check if stock is now zero
-          //yes - remove from array and print the item name
-          //no - continue
-    
-      //no  - continue
-
-      
+  for (let item of cart) {  //item is a tuple w/ quantity
+    if (itemExists(item)) {  //check if the item exists
+     const name = item[0];
+     const quantity = item[1];
+     total += addingTotal(total, name, quantity);
+    };
   };
   return total; //return total at the end
 };
 
-function itemExists(item, cart) { 
-  
+function itemExists(item) {
+  return shopping.hasOwnProperty(item[0])
+};
+
+function zeroStock(item){  //check if stock is now zero
+  if (shopping[item][1] === 0){ //does something if true - remove from array and print the item name
+    delete shopping[item];
+    console.log(item + " is out of stock") 
+  };
+};
+
+function addingTotal(curr, name, quantity){
+  after = curr
+  while (quantity != 0 && shopping[name][1] > 0) {
+    after += shopping[name][0];
+    quantity -= 1;
+    shopping[name][1] -= 1;
+  };
+  zeroStock(name)
+  return after;
 };
 
 console.log('$' + myCartTotal(cart)); 
