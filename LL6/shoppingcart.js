@@ -18,7 +18,7 @@ for (let key in shopping) {
 const newStoreItemElem = document.createElement('store-items');
 
 // create text node
-const storeText = document.createTextNode('new text');
+const storeText = document.createTextNode('new text'); 
 
 // append text to new store element
 newStoreItemElem.appendChild(storeText);
