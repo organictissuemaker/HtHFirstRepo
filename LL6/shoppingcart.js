@@ -11,31 +11,34 @@ const cart = {};
 for (let key in shopping) {
   const button = document.createElement('button'); //creating an instance of each buttom
   button.textContent = key; //assigning a title to each buttom
-  document.getElementById('store-items').appendChild(button); //appends the buttons onto the web page underneath the assiciated id
+  document.getElementById('store-items').appendChild(button); //appends the buttons onto the web page underneath the store-items div
+
+  //adding an event listner for each button
+  button.addEventListener('click', () => {
+    if (cart[key] && shopping[key][1] != cart[key]){
+      cart[key] += 1;
+    };
+    if (!cart[key]) {
+      cart[key] = 1;;
+    };
+    updateCartDisplay();
+  });
 }
 
-//adds a #store-items div to the HTML elements
-const newStoreItemElem = document.createElement('store-items');
-
-// create text node
-const storeText = document.createTextNode('new text'); 
-
-// append text to new store element
-newStoreItemElem.appendChild(storeText);
-
-// get the list of elements matching the button tag
-const buttonList = document.getElementsByTagName('store-items');
-
-const addItem = (event, item) => {
-  const button = document.createElement('item'); //creating an instance of each buttom
-  button.textContent = item; //assigning a title to each buttom
-  document.getElementById('cart').appendChild(button); //
+function updateCartDisplay() {
+  const cartElem = document.getElementById('cart');
+  cartElem.innerHTML = ''; // clear old cart display
+  let total = 0;
+  for (const item in cart) {
+    const li = document.createElement('li');
+    li.textContent = `${item}: ${cart[item]}`;
+    cartElem.appendChild(li);
+    total = shopping[item][0] * cart[item];
+    updateTotal(total);
+  };
 };
 
-// add event listeners to all buttons in buttonList
-for (const btn of buttonList) {
-  // listen for click events
-  // call the changeBackground() function when the event is triggered
-  // note that the event handler argument is an anonymous function that accepts the event object as a parameter
-  btn.addEventListener('click', (event) => changeBackground(event, event.target.textContent))
-}; 
+function updateTotal(total) {
+  const totalCost = document.getElementById('cart-total');
+  totalCost.textContent = total;
+};
