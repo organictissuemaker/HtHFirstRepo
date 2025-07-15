@@ -29,16 +29,23 @@ function updateCartDisplay() {
   const cartElem = document.getElementById('cart');
   cartElem.innerHTML = ''; // clear old cart display
   let total = 0;
-  for (const item in cart) {
+  for (const item in cart) { 
+    //create a list of items as a dic
     const li = document.createElement('li');
+
+    //add the item with the corresponding number in the li
     li.textContent = `${item}: ${cart[item]}`;
+
+    //append the list into the cart div 
     cartElem.appendChild(li);
+
+    //calculate the total and send it to another function for display
     total = shopping[item][0] * cart[item];
     updateTotal(total);
   };
 };
 
-function updateTotal(total) {
+function updateTotal(total) { //func to display total
   const totalCost = document.getElementById('cart-total');
   totalCost.textContent = total;
 };
