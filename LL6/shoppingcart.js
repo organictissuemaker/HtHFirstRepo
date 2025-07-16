@@ -21,7 +21,21 @@ for (let key in shopping) {
     if (!cart[key]) {
       cart[key] = 1;;
     };
+    if (cart[key] >= shopping[key][1]) {
+      const message = document.createElement('p');
+      message.textContent = 'Out of stock!';
+      message.classList.add('out-of-stock');
+      const outOfStock = document.getElementById('out-of-stock');
+      outOfStock.appendChild(message);
+
+      setTimeout(() => {
+        outOfStock.removeChild(message);
+      }, 1000);
+    }
     updateCartDisplay();
+
+    button.classList.add('button-animate');
+    setTimeout(() => button.classList.remove('button-animate'), 300);
   });
 }
 
@@ -40,7 +54,7 @@ function updateCartDisplay() {
     cartElem.appendChild(li);
 
     //calculate the total and send it to another function for display
-    total = shopping[item][0] * cart[item];
+    total += shopping[item][0] * cart[item];
     updateTotal(total);
   };
 };
