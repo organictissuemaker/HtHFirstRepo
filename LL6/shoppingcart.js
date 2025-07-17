@@ -63,3 +63,9 @@ function updateTotal(total) { //func to display total
   const totalCost = document.getElementById('cart-total');
   totalCost.textContent = total;
 };
+
+// shopping.js
+module.exports = {
+  updateCartDisplay, 
+  updateTotal, 
+};
