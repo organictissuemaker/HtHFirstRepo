@@ -6,7 +6,7 @@ const shopping = {
   cat: [4.00, 100]
 }; 
 
-const cart = {};
+global.cart = global.cart || {};
 
 for (let key in shopping) {
   const button = document.createElement('button'); //creating an instance of each buttom
@@ -15,13 +15,13 @@ for (let key in shopping) {
 
   //adding an event listner for each button
   button.addEventListener('click', () => {
-    if (cart[key] && shopping[key][1] != cart[key]){
-      cart[key] += 1;
+    if (global.cart[key] && shopping[key][1] != global.cart[key]){
+      global.cart[key] += 1;
     };
-    if (!cart[key]) {
-      cart[key] = 1;
+    if (!global.cart[key]) {
+      global.cart[key] = 1;
     };
-    if (cart[key] >= shopping[key][1]) {
+    if (global.cart[key] >= shopping[key][1]) {
       const message = document.createElement('p');
       message.textContent = 'Out of stock!';
       message.classList.add('out-of-stock');
@@ -43,18 +43,18 @@ function updateCartDisplay() {
   const cartElem = document.getElementById('cart');
   cartElem.innerHTML = ''; // clear old cart display
   let total = 0;
-  for (const item in cart) { 
+  for (const item in global.cart) { 
     //create a list of items as a dic
     const li = document.createElement('li');
 
     //add the item with the corresponding number in the li
-    li.textContent = `${item}: ${cart[item]}`;
+    li.textContent = `${item}: ${global.cart[item]}`;
 
     //append the list into the cart div 
     cartElem.appendChild(li);
 
     //calculate the total and send it to another function for display
-    total += shopping[item][0] * cart[item];
+    total += shopping[item][0] * global.cart[item];
     updateTotal(total);
   };
 };

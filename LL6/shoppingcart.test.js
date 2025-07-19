@@ -7,10 +7,6 @@ test('use jsdom in this test file', () => {
   expect(element).not.toBeNull();
 });
 
-// shoppingcart.test.js
-const {updateCartDisplay, updateTotal} = require('./shoppingcart.js')
-
-
 const shopping = {
   boba: [7.25, 10],
   mochi: [4.25, 5],
@@ -19,7 +15,7 @@ const shopping = {
   cat: [4.00, 100]
 };
 
-let cart; 
+let cart, updateCartDisplay, updateTotal; 
 
 describe('Shopping Cart Functions', () => {
 
@@ -34,7 +30,8 @@ describe('Shopping Cart Functions', () => {
       <ol id="cart"></ol>
       <p id="cart-total-label">Cart Total: $<span id="cart-total">0</span></p>
     `;
-    require('./shoppingcart.js');
+    ({ updateCartDisplay, updateTotal } = require('./shoppingcart.js'));
+    expect(updateCartDisplay).toBeDefined();
   }); 
 
   test('updateTotal sets the correct value in the DOM', () => {
@@ -44,8 +41,8 @@ describe('Shopping Cart Functions', () => {
   });
 
   test('updateCartDisplay updates cart and total', () => {
-    const cart = { boba: 1, labubu: 1 };
-    updateCartDisplay(cart, shopping);
+    global.cart = {boba: 1, labubu: 1 };
+    updateCartDisplay();
 
     const cartElem = document.getElementById('cart');
     const total = document.getElementById('cart-total').textContent;
