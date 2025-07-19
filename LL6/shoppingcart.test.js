@@ -40,7 +40,7 @@ describe('Shopping Cart Functions', () => {
     expect(totalDisplay.textContent).toBe("25.5");
   });
 
-  test('updateCartDisplay updates cart and total', () => {
+  test('updateCartDisplay updatesaa cart and total', () => {
     global.cart = {boba: 1, labubu: 1 };
     updateCartDisplay(global.cart);
 
