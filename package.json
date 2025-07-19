@@ -18,6 +18,8 @@
   "homepage": "https://github.com/organictissuemaker/HtHFirstRepo#readme",
   "description": "",
   "devDependencies": {
-    "jest": "^30.0.4"
+    "jest":{
+      "testEnvironment": "jsdom"
+    }
   }
 }

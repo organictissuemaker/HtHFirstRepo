@@ -19,7 +19,7 @@ for (let key in shopping) {
       cart[key] += 1;
     };
     if (!cart[key]) {
-      cart[key] = 1;;
+      cart[key] = 1;
     };
     if (cart[key] >= shopping[key][1]) {
       const message = document.createElement('p');
@@ -68,4 +68,4 @@ function updateTotal(total) { //func to display total
 module.exports = {
   updateCartDisplay, 
   updateTotal, 
-};
+}; 
