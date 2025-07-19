@@ -42,7 +42,7 @@ describe('Shopping Cart Functions', () => {
 
   test('updateCartDisplay updates cart and total', () => {
     global.cart = {boba: 1, labubu: 1 };
-    updateCartDisplay();
+    updateCartDisplay(global.cart);
 
     const cartElem = document.getElementById('cart');
     const total = document.getElementById('cart-total').textContent;
